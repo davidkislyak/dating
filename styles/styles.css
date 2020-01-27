@@ -1,0 +1,41 @@
+div .input-group input {
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+
+textarea {
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+
+#state {
+    background: none;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+
+.table td {
+    border-top: none;
+}
+
+td {
+    width: 25%;
+}
+
+.summary {
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+
+.summary div{
+    border-bottom: 1px solid #cccccc;
+    padding-left: 2rem;
+    padding-top: 1rem;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
