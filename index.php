@@ -33,9 +33,9 @@
     //profile information
     $f3->route('POST /signup/profile', function() {
         $_SESSION['first-name'] = $_POST['first-name'];
-        $_SESSION['name'] =
-            $_SESSION['first-name'].' '.$_SESSION['last-name'];
         $_SESSION['last-name'] = $_POST['last-name'];
+        $_SESSION['name'] =
+            ($_SESSION['first-name'].' '.$_SESSION['last-name']);
         $_SESSION['number'] = $_POST['number'];
         $_SESSION['gender'] = $_POST['gender'];
         $_SESSION['age'] = $_POST['age'];
