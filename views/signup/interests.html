@@ -1,0 +1,91 @@
+<include href="views/header.html">
+    <form action="./summary" method="post">
+        <div class="card mt-4 ml-4 mr-4 p-4">
+            <div class="card-body">
+                <h1 class="w-100">Interests</h1><hr>
+                <div class="row">
+                    <p class="pl-3"><b>In-door Interests</b></p>
+                    <table class="table ml-5 w-100">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="tv" value="tv">
+                                <label class="form-check-label" for="tv">tv</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="movies" value="movies">
+                                <label class="form-check-label" for="movies">movies</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="cooking" value="cooking">
+                                <label class="form-check-label" for="cooking">cooking</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="boardgames" value="boardgames">
+                                <label class="form-check-label" for="boardgames">boardgames</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="puzzles" value="puzzles">
+                                <label class="form-check-label" for="puzzles">puzzles</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="reading" value="reading">
+                                <label class="form-check-label" for="reading">reading</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="playing-cards" value="playing cards">
+                                <label class="form-check-label" for="playing-cards">playing cards</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="indoor[]" id="video-games" value="video games">
+                                <label class="form-check-label" for="video-games">video games</label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="pl-3"><b>Out-door Interests</b></p>
+                    <table class="table ml-5 w-100">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="hiking" value="hiking">
+                                <label class="form-check-label" for="hiking">hiking</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="biking" value="biking">
+                                <label class="form-check-label" for="biking">biking</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="swimming" value="swimming">
+                                <label class="form-check-label" for="swimming">swimming</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="collecting" value="collecting">
+                                <label class="form-check-label" for="collecting">collecting</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="walking" value="walking">
+                                <label class="form-check-label" for="walking">walking</label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="outdoor[]" id="climbing" value="climbing">
+                                <label class="form-check-label" for="climbing">climbing</label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row align-content-end">
+                    <div class="col-11 w-100"></div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Next ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<include href="views/footer.html">

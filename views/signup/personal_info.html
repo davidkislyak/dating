@@ -1,0 +1,52 @@
+<include href="views/header.html">
+    <form action="./profile" method="post">
+        <div class="card mt-4 ml-4 mr-4 p-4">
+            <div class="card-body">
+                <h1 class="w-100">Personal Information</h1><hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="first-name"><b>First Name</b></label>
+                        <div class="input-group mb-4">
+                            <input class="w-100" type="text" id="first-name" name="first-name">
+                        </div>
+                        <label for="last-name"><b>Last Name</b></label>
+                        <div class="input-group mb-4">
+                            <input class="w-100" type="text" id="last-name" name="last-name">
+                        </div>
+                        <label for="age"><b>Age</b></label>
+                        <div class="input-group mb-4">
+                            <input class="w-100" type="number" id="age" name="age">
+                        </div>
+                        <label><b>Gender</b></label>
+                        <div class="input-group mb-4">
+                            <div class="btn-group">
+                                <label>
+                                    <input type="radio" name="gender" id="male" value="Male" checked> Male
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" id="female" class="ml-3" value="Female"> Female
+                                </label>
+                            </div>
+                        </div>
+                        <label for="phone-number"><b>Phone Number</b></label>
+                        <div class="input-group mb-4">
+                            <input type="tel" id="phone-number" class="input-medium bfh-phone w-100" name="number">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mt-4 ml-4 mr-4 p-4 bg-light">
+                            <p><b>Note:</b> All information entered is protected by our privacy policy.
+                                Profile information can only be viewed by others with your permission.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-content-end">
+                    <div class="col-11 w-100"></div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Next ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<include href="views/footer.html">

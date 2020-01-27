@@ -1,0 +1,28 @@
+<include href="views/header.html">
+    <div class="card mt-4 ml-4 mr-4 p-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="summary">
+                        <div><p>Name: {{ @SESSION.name }}</p></div>
+                        <div><p>Gender: {{ @SESSION.gender }}</p></div>
+                        <div><p>Age: {{ @SESSION.age }}</p></div>
+                        <div><p>Phone: {{ @SESSION.number }}</p></div>
+                        <div><p>Email: {{ @SESSION.email }}</p></div>
+                        <div><p>State: {{ @SESSION.state }}</p></div>
+                        <div><p>Seeking: {{ @SESSION.seeking }}</p></div>
+                        <div><p>Interests: {{ @SESSION.interests }}</p></div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-4">
+                    <img class="rounded-lg w-75 center" src="../images/default-profile.png" alt="Profile Picture">
+                    <p>Biography</p>
+                    <p class="pl-3">{{ @SESSION.biography }}</p>
+                </div>
+            </div>
+            <div class="row w-100 justify-content-center">
+                <button type="submit" class="btn btn-primary">Contact Me!</button>
+            </div>
+        </div>
+    </div>
+<include href="views/footer.html">
