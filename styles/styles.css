@@ -39,3 +39,8 @@ td {
     margin-right: auto;
     width: 50%;
 }
+
+.err {
+    color: red;
+    visibility: visible;
+}
