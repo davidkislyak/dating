@@ -1,42 +1,74 @@
 <include href="views/header.html">
-    <form action="./profile" method="post">
+    <form action="#" method="post">
         <div class="card mt-4 ml-4 mr-4 p-4">
             <div class="card-body">
-                <h1 class="w-100">Personal Information</h1><hr>
+                <h1 class="w-100">Personal Information</h1>
+                <hr>
                 <div class="row">
                     <div class="col-md-8">
                         <label for="first-name"><b>First Name</b></label>
-                        <div class="input-group mb-4">
-                            <input class="w-100" type="text" id="first-name" name="first-name">
+                        <div class="input-group">
+                            <input class="w-100" type="text" id="first-name"
+                                   name="first-name" value="{{ @fName }}">
+                            <F3:check if="{{ @errors['fName'] }}">
+                                <div class="err">{{ @errors['fName'] }}</div>
+                            </F3:check>
                         </div>
-                        <label for="last-name"><b>Last Name</b></label>
-                        <div class="input-group mb-4">
-                            <input class="w-100" type="text" id="last-name" name="last-name">
+                        <label for="last-name" class="mt-4"><b>Last Name</b></label>
+                        <div class="input-group">
+                            <input class="w-100" type="text" id="last-name"
+                                   name="last-name" value="{{ @lName }}">
+                            <F3:check if="{{ @errors['lName'] }}">
+                                <div class="err">{{ @errors['lName'] }}</div>
+                            </F3:check>
                         </div>
-                        <label for="age"><b>Age</b></label>
-                        <div class="input-group mb-4">
-                            <input class="w-100" type="number" id="age" name="age">
+                        <label for="age" class="mt-4"><b>Age</b></label>
+                        <div class="input-group">
+                            <input class="w-100" type="number" id="age"
+                                   name="age" value="{{ @age }}">
+                            <F3:check if="{{ @errors['age'] }}">
+                                <div class="err">{{ @errors['age'] }}</div>
+                            </F3:check>
                         </div>
-                        <label><b>Gender</b></label>
-                        <div class="input-group mb-4">
+                        <label class="mt-4"><b>Gender</b></label>
+                        <div class="input-group">
                             <div class="btn-group">
-                                <label>
-                                    <input type="radio" name="gender" id="male" value="Male" checked> Male
-                                </label>
-                                <label>
-                                    <input type="radio" name="gender" id="female" class="ml-3" value="Female"> Female
-                                </label>
+                                <F3:repeat group="{{ @genders }}"
+                                           value="{{ @currGender }}">
+                                    <label class="mr-3">
+                                        <input type="radio" name="gender"
+                                               id="{{ strtolower(@currGender) }}"
+                                               value="{{ @currGender }}"
+                                        <F3:check if="{{ @gender == @currGender }}">
+                                            checked="checked"
+                                        </F3:check>
+                                        > {{ @currGender }}
+                                    </label>
+                                </F3:repeat>
                             </div>
                         </div>
-                        <label for="phone-number"><b>Phone Number</b></label>
-                        <div class="input-group mb-4">
-                            <input type="tel" id="phone-number" class="input-medium bfh-phone w-100" name="number">
+                        <F3:check if="{{ @errors['gender'] }}">
+                            <div class="err">{{ @errors['gender'] }}</div>
+                        </F3:check>
+                        <label for="phone-number"
+                               class="mt-4"><b>Phone Number</b></label>
+                        <div class="input-group">
+                            <input class="w-100"
+                                   type="tel" id="phone-number" name="phone-number"
+                                   placeholder="Ex. 2535552892"
+                                   value="{{ @phone }}">
+
+                            <F3:check if="{{ @errors['phone'] }}">
+                                <div class="err">{{ @errors['phone'] }}</div>
+                            </F3:check>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card mt-4 ml-4 mr-4 p-4 bg-light">
-                            <p><b>Note:</b> All information entered is protected by our privacy policy.
-                                Profile information can only be viewed by others with your permission.</p>
+                            <p><b>Note:</b> All information entered is
+                                protected by our privacy policy.
+                                Profile information can only be viewed by
+                                others with your permission.</p>
                         </div>
                     </div>
                 </div>
@@ -49,4 +81,4 @@
             </div>
         </div>
     </form>
-<include href="views/footer.html">
+    <include href="views/footer.html">
