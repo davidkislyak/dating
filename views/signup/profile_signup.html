@@ -1,5 +1,5 @@
 <include href="views/header.html">
-    <form action="./interests" method="post">
+    <form action="#" method="post">
         <div class="card mt-4 ml-4 mr-4 p-4">
             <div class="card-body">
                 <h1 class="w-100">Profile</h1>
@@ -7,85 +7,55 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="email"><b>Email</b></label>
-                        <div class="input-group mb-4">
-                            <input class="w-100 rounded" type="text" id="email" name="email">
+                        <div class="input-group">
+                            <input class="w-100 rounded" type="text" id="email"
+                                   name="email" value="{{ @email }}">
                         </div>
-                        <label for="state"><b>State</b></label>
-                        <div class="input-group mb-4">
+                        <F3:check if="{{ @errors['email'] }}">
+                            <div class="err">{{ @errors['email'] }}</div>
+                        </F3:check>
+                        <label for="state" class="mt-4"><b>State</b></label>
+                        <div class="input-group">
                             <select class="w-100" name="state" id="state">
-                                <option value="Washington">Washington</option>
-                                <option value="---">---</option>
-                                <option value="Alabama">Alabama</option>
-                                <option value="Alaska">Alaska</option>
-                                <option value="Arizona">Arizona</option>
-                                <option value="Arkansas">Arkansas</option>
-                                <option value="California">California</option>
-                                <option value="Colorado">Colorado</option>
-                                <option value="Connecticut">Connecticut</option>
-                                <option value="Delaware">Delaware</option>
-                                <option value="District of Columbia">District of Columbia</option>
-                                <option value="Florida">Florida</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Guam">Guam</option>
-                                <option value="Hawaii">Hawaii</option>
-                                <option value="Idaho">Idaho</option>
-                                <option value="Illinois">Illinois</option>
-                                <option value="Indiana">Indiana</option>
-                                <option value="Iowa">Iowa</option>
-                                <option value="Kansas">Kansas</option>
-                                <option value="Kentucky">Kentucky</option>
-                                <option value="Louisiana">Louisiana</option>
-                                <option value="Maine">Maine</option>
-                                <option value="Maryland">Maryland</option>
-                                <option value="Massachusetts">Massachusetts</option>
-                                <option value="Michigan">Michigan</option>
-                                <option value="Minnesota">Minnesota</option>
-                                <option value="Mississippi">Mississippi</option>
-                                <option value="Missouri">Missouri</option>
-                                <option value="Montana">Montana</option>
-                                <option value="Nebraska">Nebraska</option>
-                                <option value="Nevada">Nevada</option>
-                                <option value="New Hampshire">New Hampshire</option>
-                                <option value="New Jersey">New Jersey</option>
-                                <option value="New Mexico">New Mexico</option>
-                                <option value="New York">New York</option>
-                                <option value="North Carolina">North Carolina</option>
-                                <option value="North Dakota">North Dakota</option>
-                                <option value="Northern Marianas Islands">Northern Marianas Islands</option>
-                                <option value="Ohio">Ohio</option>
-                                <option value="Oklahoma">Oklahoma</option>
-                                <option value="Oregon">Oregon</option>
-                                <option value="Pennsylvania">Pennsylvania</option>
-                                <option value="Puerto Rico">Puerto Rico</option>
-                                <option value="Rhode Island">Rhode Island</option>
-                                <option value="South Carolina">South Carolina</option>
-                                <option value="South Dakota">South Dakota</option>
-                                <option value="Tennessee">Tennessee</option>
-                                <option value="Texas">Texas</option>
-                                <option value="Utah">Utah</option>
-                                <option value="Vermont">Vermont</option>
-                                <option value="Virginia">Virginia</option>
-                                <option value="Virgin Islands">Virgin Islands</option>
-                                <option value="West Virginia">West Virginia</option>
-                                <option value="Wisconsin">Wisconsin</option>
-                                <option value="Wyoming">Wyoming</option>
+                                <option value="default">-- Select State --</option>
+                                <F3:repeat group="{{ @states }}"
+                                           value="{{ @curState }}">
+                                    <option value="{{ @curState }}"
+                                            <F3:check if="{{ @state == @curState }}">
+                                                selected
+                                            </F3:check>
+                                    >{{ @curState }}</option>
+                                </F3:repeat>
                             </select>
                         </div>
-                        <label><b>Seeking</b></label>
-                        <div class="input-group mb-4">
+                        <F3:check if="{{ @errors['state'] }}">
+                            <div class="err">{{ @errors['state'] }}</div>
+                        </F3:check>
+                        <label class="mt-4"><b>Seeking</b></label>
+                        <div class="input-group">
                             <div class="btn-group">
-                                <label>
-                                    <input type="radio" name="seeking" id="male" value="Male" checked> Male
-                                </label>
-                                <label>
-                                    <input type="radio" name="seeking" id="female" class="ml-3" value="Female"> Female
-                                </label>
+                                <F3:repeat group="{{ @partners }}"
+                                           value="{{ @currPartner }}">
+                                    <label class="mr-3">
+                                        <input type="radio" name="partner"
+                                               id="{{ strtolower(@currPartner) }}"
+                                               value="{{ @currPartner }}"
+                                        <F3:check if="{{ @partner == @currPartner }}">
+                                            checked="checked"
+                                        </F3:check>
+                                        > {{ @currPartner }}
+                                    </label>
+                                </F3:repeat>
                             </div>
                         </div>
+                        <F3:check if="{{ @errors['partner'] }}">
+                            <div class="err">{{ @errors['partner'] }}</div>
+                        </F3:check>
                     </div>
                     <div class="col-md-6">
                         <label for="biography"><b>Biography</b></label><br>
-                        <textarea class="w-100 h-75" name="biography" id="biography"></textarea>
+                        <textarea class="w-100 h-75" name="biography"
+                                  id="biography">{{ @biography }}</textarea>
                     </div>
                 </div>
                 <div class="row align-content-end">
