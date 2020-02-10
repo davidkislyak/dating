@@ -4,10 +4,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="summary">
-                        <div><p>Name: {{ @SESSION.name }}</p></div>
+                        <div><p>Name: {{ (@SESSION.fName)." ".(@SESSION.lName) }}</p></div>
                         <div><p>Gender: {{ @SESSION.gender }}</p></div>
                         <div><p>Age: {{ @SESSION.age }}</p></div>
-                        <div><p>Phone: {{ @SESSION.number }}</p></div>
+                        <div><p>Phone: {{ @SESSION.phone }}</p></div>
                         <div><p>Email: {{ @SESSION.email }}</p></div>
                         <div><p>State: {{ @SESSION.state }}</p></div>
                         <div><p>Seeking: {{ @SESSION.seeking }}</p></div>
@@ -25,4 +25,4 @@
             </div>
         </div>
     </div>
-<include href="views/footer.html">
+    <include href="views/footer.html">
