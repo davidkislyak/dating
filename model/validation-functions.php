@@ -48,7 +48,7 @@ function validOutdoor($outdoor)
 {
     global $f3;
 
-    if (sizeof($outdoor) == 0) {
+    if ($outdoor == null) {
         return true;
     }
 
@@ -65,7 +65,7 @@ function validIndoor($indoor)
 {
     global $f3;
 
-    if (sizeof($indoor) == 0) {
+    if ($indoor == null) {
         return true;
     }
 

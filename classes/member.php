@@ -1,9 +1,12 @@
 <?php
 
-class Members
+class Member
 {
-    private $_fname, $_lname, $_age, $_gender, $_phone, $_email, $_state,
-        $_seeking, $_bio;
+    private $_fname, $_lname, $_age, $_gender, $_phone;
+    private $_email;
+    private $_state;
+    private $_seeking;
+    private $_bio;
 
     /**
      * Members constructor.
@@ -12,23 +15,14 @@ class Members
      * @param $_age
      * @param $_gender
      * @param $_phone
-     * @param $_email
-     * @param $_state
-     * @param $_seeking
-     * @param $_bio
      */
-    public function __construct($_fname, $_lname, $_age, $_gender, $_phone,
-                                $_email, $_state, $_seeking, $_bio)
+    function __construct($_fname, $_lname, $_age, $_gender, $_phone)
     {
         $this->_fname = $_fname;
         $this->_lname = $_lname;
         $this->_age = $_age;
         $this->_gender = $_gender;
         $this->_phone = $_phone;
-        $this->_email = $_email;
-        $this->_state = $_state;
-        $this->_seeking = $_seeking;
-        $this->_bio = $_bio;
     }
 
     /**

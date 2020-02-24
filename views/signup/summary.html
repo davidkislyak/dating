@@ -4,20 +4,36 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="summary">
-                        <div><p>Name: {{ (@SESSION.fName)." ".(@SESSION.lName) }}</p></div>
-                        <div><p>Gender: {{ @SESSION.gender }}</p></div>
-                        <div><p>Age: {{ @SESSION.age }}</p></div>
-                        <div><p>Phone: {{ @SESSION.phone }}</p></div>
-                        <div><p>Email: {{ @SESSION.email }}</p></div>
-                        <div><p>State: {{ @SESSION.state }}</p></div>
-                        <div><p>Seeking: {{ @SESSION.seeking }}</p></div>
-                        <div><p>Interests: {{ @SESSION.interests }}</p></div>
+                        <div><p>Name:
+                            {{ (@SESSION.member->getFname())." ".
+                            (@SESSION.member->getLname()) }}</p></div>
+                        <F3:check if="{{ @SESSION.member->getGender() != null }}">
+                            <div><p>Gender: {{ @SESSION.member->getGender() }}</p></div>
+                        </F3:check>
+                        <div><p>Age: {{ @SESSION.member->getAge() }}</p></div>
+                        <div><p>Phone: {{ @SESSION.member->getPhone() }}</p></div>
+                        <div><p>Email: {{ @SESSION.member->getEmail() }}</p></div>
+                        <F3:check if="{{ @SESSION.member->getState() != 'default' }}">
+                            <div><p>State: {{ @SESSION.member->getState() }}</p></div>
+                        </F3:check>
+                        <F3:check if="{{ @SESSION.member->getSeeking() != null }}">
+                            <div><p>Seeking: {{ @SESSION.member->getSeeking() }}</p></div>
+                        </F3:check>
+                        <F3:check if="{{ @SESSION.member instanceof PremiumMember
+                                         && (@SESSION.member->getInDoorInterests() != null
+                                         || @SESSION.member->getOutDoorInterests() != null)}}">
+                            <div><p>Interests:
+                                {{ (@SESSION.member->getInDoorInterests()).(@SESSION.member->getOutDoorInterests()) }}
+                            </p></div>
+                        </F3:check>
                     </div>
                 </div>
                 <div class="col-md-6 p-4">
                     <img class="rounded-lg w-75 center" src="../images/default-profile.png" alt="Profile Picture">
-                    <p>Biography</p>
-                    <p class="pl-3">{{ @SESSION.biography }}</p>
+                    <F3:check if="{{ @SESSION.member->getBio() != null}}">
+                        <p>Biography</p>
+                        <p class="pl-3">{{ @SESSION.member->getBio() }}</p>
+                    </F3:check>
                 </div>
             </div>
             <div class="row w-100 justify-content-center">

@@ -5,8 +5,6 @@
  * /328/dating/index.php
  */
 
-session_start();
-
 // Error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -14,6 +12,8 @@ error_reporting(E_ALL);
 //Require autoload file
 require("./vendor/autoload.php");
 require_once('./model/validate.php');
+
+session_start();
 
 //Instantiate F3
 $f3 = Base::instance();
@@ -65,6 +65,9 @@ $f3->route('GET|POST /signup/information', function ($f3) {
         $age = $_POST['age'];
         $phone = $_POST['phone-number'];
         $gender = $_POST['gender'];
+        $membership = $_POST['premium-checkbox'];
+
+        echo 'premium selected: '.$_POST['premium-checkbox'];
 
         //Add data to hive
         $f3->set('fName', $fName);
@@ -75,15 +78,18 @@ $f3->route('GET|POST /signup/information', function ($f3) {
 
         //If data is valid
         if (validPersonalInfo()) {
-            $_SESSION['fName'] = $fName;
-            $_SESSION['lName'] = $lName;
-            $_SESSION['age'] = $age;
-            $_SESSION['phone'] = $phone;
-            $_SESSION['gender'] = $gender;
+            if ($membership == "premium") {
+                $member =
+                    new PremiumMember($fName, $lName, $age, $gender, $phone);
+            } else {
+                $member =
+                    new Member($fName, $lName, $age, $gender, $phone);
+            }
+
+            $_SESSION['member'] = $member;
+            $f3->reroute('/signup/profile');
 
             echo "Form is valid: True";
-
-            $f3->reroute('/signup/profile');
         }
     }
 
@@ -111,12 +117,24 @@ $f3->route('GET|POST /signup/profile', function ($f3) {
 
         //If data is valid
         if (validProfileSignup()) {
-            $_SESSION['seeking'] = $partner;
-            $_SESSION['biography'] = $biography;
-            $_SESSION['state'] = $state;
-            $_SESSION['email'] = $email;
+//            $_SESSION['seeking'] = $partner;
+//            $_SESSION['biography'] = $biography;
+//            $_SESSION['state'] = $state;
+//            $_SESSION['email'] = $email;
 
-            $f3->reroute('/signup/interests');
+            $member = $_SESSION['member'];
+//            echo "member is set: ".isset($_SESSION['member']);
+
+            $member->setSeeking($partner);
+            $member->setBio($biography);
+            $member->setState($state);
+            $member->setEmail($email);
+
+            if ($_SESSION['member'] instanceof PremiumMember) {
+                $f3->reroute('/signup/interests');
+            } else {
+                $f3->reroute('/signup/summary');
+            }
         }
     }
 
@@ -140,9 +158,18 @@ $f3->route('GET|POST /signup/interests', function ($f3) {
 
         //If data is valid
         if (validInterests()) {
-            $_SESSION['indoor'] = $indoorSelections;
-            $_SESSION['outdoor'] = $outdoorSelections;
+//            $_SESSION['indoor'] = $indoorSelections;
+//            $_SESSION['outdoor'] = $outdoorSelections;
+            $member = $_SESSION['member'];
 
+
+            if ($member instanceof PremiumMember) {
+                $member->setInDoorInterests($indoorSelections);
+                $member->setOutDoorInterests($outdoorSelections);
+            }
+
+//            echo 'Indoor Interests: '.$member->getInDoorInterests();
+//            echo 'Outdoor Interests: '.$member->getOutDoorInterests();
             $f3->reroute('/signup/summary');
         }
     }
@@ -154,7 +181,11 @@ $f3->route('GET|POST /signup/interests', function ($f3) {
 //sign-up summary
 $f3->route('GET /signup/summary', function () {
     // Generate interest string
-    $_SESSION['interests'] = generateInterest();
+//    $_SESSION['interests'] = generateInterest();
+    if ($_SESSION['member'] instanceof PremiumMember) {
+        $_SESSION['member']->setInDoorInterests(generateInDoorInterests());
+        $_SESSION['member']->setOutDoorInterests(generateOutDoorInterests());
+    }
 
     $view = new Template();
     echo $view->render('./views/signup/summary.html');
@@ -164,19 +195,45 @@ $f3->route('GET /signup/summary', function () {
 $f3->run();
 
 //Helper functions
-function generateInterest()
+//function generateInterests()
+//{
+//    $return = '';
+//
+//    if (!sizeof($_SESSION['member']->getInDoorInterests()) == 0) {
+//        foreach ($_SESSION['member']->getInDoorInterests() as $x) {
+//            $return .= $x . ' ';
+//        }
+//    }
+//
+//
+//    if (!sizeof($_SESSION['member']->getOutDoorInterests()) == 0) {
+//        foreach ($_SESSION['member']->getOutDoorInterests() as $x) {
+//            $return .= $x . ' ';
+//        }
+//    }
+//
+//    return $return;
+//}
+
+function generateInDoorInterests()
 {
     $return = '';
 
-    if (!sizeof($_SESSION['indoor']) == 0) {
-        foreach ($_SESSION['indoor'] as $x) {
+    if ($_SESSION['member']->getInDoorInterests() != null) {
+        foreach ($_SESSION['member']->getInDoorInterests() as $x) {
             $return .= $x . ' ';
         }
     }
 
+    return $return;
+}
 
-    if (!sizeof($_SESSION['outdoor']) == 0) {
-        foreach ($_SESSION['outdoor'] as $x) {
+function generateOutDoorInterests()
+{
+    $return = '';
+
+    if ($_SESSION['member']->getOutDoorInterests() != null) {
+        foreach ($_SESSION['member']->getOutDoorInterests() as $x) {
             $return .= $x . ' ';
         }
     }
