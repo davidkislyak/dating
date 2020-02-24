@@ -1,12 +1,18 @@
 <?php
 
-
+/**
+ * Class: PremiumMember, represents members with premium, interests data.
+ *
+ * @author  David Kislyak
+ * @version 1.0
+ */
 class PremiumMember extends Member
 {
     private $_inDoorInterests, $_outDoorInterests;
 
     /**
      * PremiumMember constructor.
+     *
      * @param $_fname
      * @param $_lname
      * @param $_age

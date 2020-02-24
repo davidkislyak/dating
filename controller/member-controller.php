@@ -1,20 +1,37 @@
 <?php
 
+/**
+ * Class: MemberController, in charge of containing the routing logic
+ *
+ * @author  David Kislyak
+ * @version 1.0
+ */
 class MemberController
 {
     private $_f3;
 
+    /**
+     * MemberController constructor.
+     *
+     * @param $f3
+     */
     public function __construct($f3)
     {
         $this->_f3 = $f3;
     }
 
+    /**
+     * Home route
+     */
     public function home()
     {
         $view = new Template();
         echo $view->render('./views/home.html');
     }
 
+    /**
+     * Basic Information Page
+     */
     public function signupInformation()
     {
         session_unset();
@@ -60,6 +77,9 @@ class MemberController
         echo $view->render('./views/signup/personal_info.html');
     }
 
+    /**
+     * Expanded profile details
+     */
     public function signupProfile()
     {
         //If form has been submitted, validate
@@ -98,6 +118,9 @@ class MemberController
         echo $view->render('./views/signup/profile_signup.html');
     }
 
+    /**
+     * Premium, profile details
+     */
     public function signupInterests()
     {
         //If form has been submitted, validate
@@ -129,6 +152,9 @@ class MemberController
         echo $view->render('./views/signup/interests.html');
     }
 
+    /**
+     * Overall, profile creation summary
+     */
     public function signupSummary()
     {
         // Generate interest string
@@ -141,7 +167,12 @@ class MemberController
         echo $view->render('./views/signup/summary.html');
     }
 
-    //Helper functions
+    // ---Helper functions---
+    /**
+     * Creates an indoor interests string
+     *
+     * @return string
+     */
     function generateInDoorInterests()
     {
         $return = '';
@@ -155,6 +186,11 @@ class MemberController
         return $return;
     }
 
+    /**
+     * Creates an outdoor interests string
+     *
+     * @return string
+     */
     function generateOutDoorInterests()
     {
         $return = '';

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class:   Member, represents any member on the site.
+ *
+ * @author  David Kislyak
+ * @version 1.0
+ */
 class Member
 {
     private $_fname, $_lname, $_age, $_gender, $_phone;
@@ -10,6 +16,7 @@ class Member
 
     /**
      * Members constructor.
+     *
      * @param $_fname
      * @param $_lname
      * @param $_age
