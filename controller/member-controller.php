@@ -47,8 +47,6 @@ class MemberController
             $gender = $_POST['gender'];
             $membership = $_POST['premium-checkbox'];
 
-            echo 'premium selected: ' . $_POST['premium-checkbox'];
-
             //Add data to hive
             $this->_f3->set('fName', $fName);
             $this->_f3->set('lName', $lName);
@@ -68,8 +66,6 @@ class MemberController
 
                 $_SESSION['member'] = $member;
                 $this->_f3->reroute('/signup/profile');
-
-                echo "Form is valid: True";
             }
         }
 
