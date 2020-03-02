@@ -69,11 +69,17 @@ class Database
     //PDO object
     private $_dbh;
 
+    /**
+     * Database constructor.
+     */
     public function __construct()
     {
         $this->connect();
     }
 
+    /**
+     * Connection creator function
+     */
     private function connect()
     {
         require_once("../../../connect_dating.php");
@@ -87,6 +93,13 @@ class Database
         }
     }
 
+    /**
+     * Handles mySql query requests
+     *
+     * @param string $sql     mySQL Query string
+     * @param boolean $needID Return last query id or not
+     * @return array|string   Either an id or sql result.
+     */
     private function executeSql($sql, $needID=null)
     {
         // Prepare the statement
@@ -103,6 +116,12 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Inserts member object to DB
+     *
+     * @param Member $member member object for insertion
+     * @return bool          success status
+     */
     public function insertMember($member)
     {
         $fName = $member->getFname();
@@ -160,6 +179,11 @@ class Database
         return true;
     }
 
+    /**
+     * Gets all members from db
+     *
+     * @return array|string Returns all members in DB
+     */
     public function getMembers()
     {
         $sql = "SELECT *
@@ -168,6 +192,12 @@ class Database
         return $this->executeSql($sql);
     }
 
+    /**
+     * Gets member by id
+     *
+     * @param int $member_id Member id
+     * @return array|string  Returns member
+     */
     public function getMember($member_id)
     {
         $sql = "SELECT *
@@ -177,6 +207,12 @@ class Database
         return $this->executeSql($sql);
     }
 
+    /**
+     * Gets interests held by member
+     *
+     * @param int $member_id Member id
+     * @return array|string  Returns interests
+     */
     public function getInterests($member_id)
     {
         $sql = "SELECT interest.interest

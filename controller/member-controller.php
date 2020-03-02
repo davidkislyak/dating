@@ -162,38 +162,9 @@ class MemberController
         echo $view->render('./views/signup/summary.html');
     }
 
-    // ---Helper functions---
-//    function test()
-//    {
-//        $this->_db = new Database();
-//
-//        $db = $this->_db;
-//
-//        echo "<br><br>Get all members: ";
-//        var_dump(highlight_string("\n<?\n". var_export($db->getMembers(), true)));
-//
-//
-//        echo "<br><br>Get member 1: ";
-//        var_dump(highlight_string("\n<?\n". var_export($db->getMember(1), true)));
-//
-//
-//        echo "<br><br>Get member 1 interests: ";
-//        var_dump(highlight_string("\n<?\n". var_export($db->getInterests(1), true)));
-//
-//        $member = new PremiumMember('Joe', 'Bidden', 65,
-//                             0, '0321654987');
-//        $member->setEmail('JoeBidden@campain.com');
-//        $member->setState("Washington");
-//        $member->setSeeking(1);
-//        $member->setBio("Just another corrupt politician looking for another wife to divorce.");
-//        $member->setInDoorInterests(array("tv", "movies", "puzzles"));
-//        $member->setOutDoorInterests(array("biking", "climbing"));
-//
-//        echo "<br><br>Insert member: ";
-//        var_dump(highlight_string("\n<?\n". var_export($member, true)));
-//        echo "<br><br>Insert Success: ".$db->insertMember($member);
-//    }
-
+    /**
+     * Profile -> DB
+     */
     public function submit() {
         //database object
         $this->_db = new Database();

@@ -79,10 +79,5 @@ $f3->route('GET /signup/submit', function () {
     $GLOBALS['controller']->submit();
 });
 
-//test submit
-//$f3->route('GET /test', function () {
-//    $GLOBALS['controller']->test();
-//});
-
 //Run fat free
 $f3->run();
