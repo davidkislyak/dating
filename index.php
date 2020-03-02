@@ -70,9 +70,19 @@ $f3->route('GET|POST /signup/interests', function () {
 });
 
 //sign-up summary
-$f3->route('GET /signup/summary', function () {
+$f3->route('GET|POST /signup/summary', function () {
     $GLOBALS['controller']->signupSummary();
 });
+
+//submit to db
+$f3->route('GET /signup/submit', function () {
+    $GLOBALS['controller']->submit();
+});
+
+//test submit
+//$f3->route('GET /test', function () {
+//    $GLOBALS['controller']->test();
+//});
 
 //Run fat free
 $f3->run();
