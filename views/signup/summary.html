@@ -1,44 +1,47 @@
 <include href="views/header.html">
-    <div class="card mt-4 ml-4 mr-4 p-4">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="summary">
-                        <div><p>Name:
-                            {{ (@SESSION.member->getFname())." ".
-                            (@SESSION.member->getLname()) }}</p></div>
-                        <F3:check if="{{ @SESSION.member->getGender() != null }}">
-                            <div><p>Gender: {{ @SESSION.member->getGender() }}</p></div>
-                        </F3:check>
-                        <div><p>Age: {{ @SESSION.member->getAge() }}</p></div>
-                        <div><p>Phone: {{ @SESSION.member->getPhone() }}</p></div>
-                        <div><p>Email: {{ @SESSION.member->getEmail() }}</p></div>
-                        <F3:check if="{{ @SESSION.member->getState() != 'default' }}">
-                            <div><p>State: {{ @SESSION.member->getState() }}</p></div>
-                        </F3:check>
-                        <F3:check if="{{ @SESSION.member->getSeeking() != null }}">
-                            <div><p>Seeking: {{ @SESSION.member->getSeeking() }}</p></div>
-                        </F3:check>
-                        <F3:check if="{{ @SESSION.member instanceof PremiumMember
-                                         && (@SESSION.member->getInDoorInterests() != null
-                                         || @SESSION.member->getOutDoorInterests() != null)}}">
-                            <div><p>Interests:
-                                {{ (@SESSION.member->getInDoorInterests()).(@SESSION.member->getOutDoorInterests()) }}
-                            </p></div>
+    <form action="#" method="post">
+        <div class="card mt-4 ml-4 mr-4 p-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="summary">
+                            <div><p>Name:
+                                {{ (@SESSION.member->getFname())." ".
+                                (@SESSION.member->getLname()) }}</p></div>
+                            <F3:check if="{{ @SESSION.member->getGender() != null }}">
+                                <div><p>Gender: {{ @SESSION.member->getGender() }}</p></div>
+                            </F3:check>
+                            <div><p>Age: {{ @SESSION.member->getAge() }}</p></div>
+                            <div><p>Phone: {{ @SESSION.member->getPhone() }}</p></div>
+                            <div><p>Email: {{ @SESSION.member->getEmail() }}</p></div>
+                            <F3:check if="{{ @SESSION.member->getState() != 'default' }}">
+                                <div><p>State: {{ @SESSION.member->getState() }}</p></div>
+                            </F3:check>
+                            <F3:check if="{{ @SESSION.member->getSeeking() != null }}">
+                                <div><p>Seeking: {{ @SESSION.member->getSeeking() }}</p></div>
+                            </F3:check>
+                            <F3:check if="{{ @SESSION.member instanceof PremiumMember
+                                             && (@SESSION.member->getInDoorInterests() != null
+                                             || @SESSION.member->getOutDoorInterests() != null)}}">
+                                <div><p>Interests:
+                                    {{ (@SESSION.member->generateInDoorInterests()).
+                                    (@SESSION.member->generateOutDoorInterests()) }}
+                                </p></div>
+                            </F3:check>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-4">
+                        <img class="rounded-lg w-75 center" src="../images/default-profile.png" alt="Profile Picture">
+                        <F3:check if="{{ @SESSION.member->getBio() != null}}">
+                            <p>Biography</p>
+                            <p class="pl-3">{{ @SESSION.member->getBio() }}</p>
                         </F3:check>
                     </div>
                 </div>
-                <div class="col-md-6 p-4">
-                    <img class="rounded-lg w-75 center" src="../images/default-profile.png" alt="Profile Picture">
-                    <F3:check if="{{ @SESSION.member->getBio() != null}}">
-                        <p>Biography</p>
-                        <p class="pl-3">{{ @SESSION.member->getBio() }}</p>
-                    </F3:check>
+                <div class="row w-100 justify-content-center">
+                    <button type="submit" class="btn btn-primary">Contact Me!</button>
                 </div>
             </div>
-            <div class="row w-100 justify-content-center">
-                <button type="submit" class="btn btn-primary">Contact Me!</button>
-            </div>
         </div>
-    </div>
+    </form>
     <include href="views/footer.html">

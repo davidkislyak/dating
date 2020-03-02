@@ -9,6 +9,7 @@
 class MemberController
 {
     private $_f3;
+    private $_db;
 
     /**
      * MemberController constructor.
@@ -153,10 +154,8 @@ class MemberController
      */
     public function signupSummary()
     {
-        // Generate interest string
-        if ($_SESSION['member'] instanceof PremiumMember) {
-            $_SESSION['member']->setInDoorInterests($this->generateInDoorInterests());
-            $_SESSION['member']->setOutDoorInterests($this->generateOutDoorInterests());
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->_f3->reroute('/signup/submit');
         }
 
         $view = new Template();
@@ -164,39 +163,43 @@ class MemberController
     }
 
     // ---Helper functions---
-    /**
-     * Creates an indoor interests string
-     *
-     * @return string
-     */
-    function generateInDoorInterests()
-    {
-        $return = '';
+//    function test()
+//    {
+//        $this->_db = new Database();
+//
+//        $db = $this->_db;
+//
+//        echo "<br><br>Get all members: ";
+//        var_dump(highlight_string("\n<?\n". var_export($db->getMembers(), true)));
+//
+//
+//        echo "<br><br>Get member 1: ";
+//        var_dump(highlight_string("\n<?\n". var_export($db->getMember(1), true)));
+//
+//
+//        echo "<br><br>Get member 1 interests: ";
+//        var_dump(highlight_string("\n<?\n". var_export($db->getInterests(1), true)));
+//
+//        $member = new PremiumMember('Joe', 'Bidden', 65,
+//                             0, '0321654987');
+//        $member->setEmail('JoeBidden@campain.com');
+//        $member->setState("Washington");
+//        $member->setSeeking(1);
+//        $member->setBio("Just another corrupt politician looking for another wife to divorce.");
+//        $member->setInDoorInterests(array("tv", "movies", "puzzles"));
+//        $member->setOutDoorInterests(array("biking", "climbing"));
+//
+//        echo "<br><br>Insert member: ";
+//        var_dump(highlight_string("\n<?\n". var_export($member, true)));
+//        echo "<br><br>Insert Success: ".$db->insertMember($member);
+//    }
 
-        if ($_SESSION['member']->getInDoorInterests() != null) {
-            foreach ($_SESSION['member']->getInDoorInterests() as $x) {
-                $return .= $x . ' ';
-            }
-        }
+    public function submit() {
+        //database object
+        $this->_db = new Database();
 
-        return $return;
-    }
+        var_dump(highlight_string("\n<?\n". var_export($_SESSION['member'], true)));
 
-    /**
-     * Creates an outdoor interests string
-     *
-     * @return string
-     */
-    function generateOutDoorInterests()
-    {
-        $return = '';
-
-        if ($_SESSION['member']->getOutDoorInterests() != null) {
-            foreach ($_SESSION['member']->getOutDoorInterests() as $x) {
-                $return .= $x . ' ';
-            }
-        }
-
-        return $return;
+        $this->_db->insertMember($_SESSION['member']);
     }
 }
