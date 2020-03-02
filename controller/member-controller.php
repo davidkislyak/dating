@@ -30,6 +30,23 @@ class MemberController
         echo $view->render('./views/home.html');
     }
 
+    public function adminPortal()
+    {
+        $this->_db = new Database();
+
+        $_SESSION['members'] = $this->_db->getMembers();
+
+        $memberInterests = Array();
+        foreach ($_SESSION['members'] as $member) {
+            $memberInterests[] = $this->_db->getInterests($member['member_id']);
+        }
+
+        $_SESSION['members_interests'] = $memberInterests;
+
+        $view = new Template();
+        echo $view->render('./views/admin/admin_members.html');
+    }
+
     /**
      * Basic Information Page
      */
@@ -165,11 +182,10 @@ class MemberController
     /**
      * Profile -> DB
      */
-    public function submit() {
+    public function submit()
+    {
         //database object
         $this->_db = new Database();
-
-        var_dump(highlight_string("\n<?\n". var_export($_SESSION['member'], true)));
 
         $this->_db->insertMember($_SESSION['member']);
     }

@@ -53,6 +53,11 @@ $f3->route('GET /', function () {
     $GLOBALS['controller']->home();
 });
 
+//Define an admin portal route
+$f3->route('GET /admin/members', function () {
+    $GLOBALS['controller']->adminPortal();
+});
+
 // -- Define Sign-Up routes --
 //personal information
 $f3->route('GET|POST /signup/information', function () {

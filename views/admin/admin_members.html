@@ -1,0 +1,80 @@
+<include href="views/header.html">
+    <div class="main card mt-4 ml-4 mr-4 p-4">
+        <div class="card-body">
+            <h1 class="w-100">Blue's Dating</h1>
+            <h3>Membership</h3><br>
+            <table id="memberTable" class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>Gender</th>
+                    <th>Seeking</th>
+                    <th>Premium</th>
+                    <th>Interests</th>
+                </tr>
+                </thead>
+                <tbody>
+                <F3:repeat group="{{ @SESSION.members }}" value="{{ @member }}" counter="{{@counter}}">
+                    <tr>
+                        <!--                            {{ var_dump(highlight_string('\n<?\n'. var_export(@member, true))) }}-->
+                        <td>{{ @member['member_id'] }}</td>
+                        <td>{{ @member['fname']." ".@member['lname'] }}</td>
+                        <td>{{ @member['age'] }}</td>
+                        <td>
+                            {{ '('.substr(@member['phone'], 0, 3).')'.
+                            ' '.substr(@member['phone'], 3, 3).
+                            '-'.substr(@member['phone'], 6)}}
+                        </td>
+                        <!--                            <td>{{ @member['phone'] }}</td>-->
+                        <td>{{ @member['email'] }}</td>
+                        <td>
+                            <F3:check if="{{ @member['state'] != 'default' }}">
+                                {{ @member['state'] }}
+                            </F3:check>
+                        </td>
+                        <td>
+                            <F3:check if="{{ @member['gender'] == 0 }}">
+                                Male
+                            </F3:check>
+                            <F3:check if="{{ @member['gender'] == 1 }}">
+                                Female
+                            </F3:check>
+                        </td>
+                        <td>
+                            <F3:check if="{{ @member['seeking'] == 0 }}">
+                                Male
+                            </F3:check>
+                            <F3:check if="{{ @member['seeking'] == 1 }}">
+                                Female
+                            </F3:check>
+                        </td>
+                        <td>
+                            <label><input type="checkbox"
+                                <F3:check if="{{ @member['premium'] == 1}}">
+                                    checked
+                                </F3:check>
+                                ></label>
+                        </td>
+                        <td>
+                            <F3:repeat group="{{ @_SESSION['members_interests'][@counter-1] }}"
+                                       key="{{ @interestK }}" value="{{ @interestV }}" counter="{{@interestC}}">
+                                <F3:check if="{{ @interestC != sizeof(@_SESSION['members_interests'][@counter-1]) }}">
+                                    {{@interestV['interest'].', '}}
+                                </F3:check>
+                                <F3:check if="{{ @interestC == sizeof(@_SESSION['members_interests'][@counter-1]) }}">
+                                    {{@interestV['interest']}}
+                                </F3:check>
+                            </F3:repeat>
+                        </td>
+                    </tr>
+                </F3:repeat>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <include href="views/footer.html">
